@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Home</title>
+{% endblock %}
+
+{% block content %}
+    <p>
+        
+    </p>
+    <h1>Tasks</h1>
+    <div style="display:flex; align-items: flex-start; justify-content: space-between;gap:100px;">
+        <div>
+            <div class="search-container" >
+                <form method="GET" style="display:flex; align-items: flex-start; justify-content: space-around;gap:10px;">
+                    <input type="text" name="search" placeholder="Search tasks..." value="{{ request.GET.search }}">
+                    <input type="date" name="date_filter" value="{{ request.GET.date_filter}}">
+                    <button type="submit">filter</button>
+                    {% if request.GET.search or request.GET.date_filter %}
+                        <a href="{% url 'home' %}" class="clear-btn">Clear</a>
+                    {% endif %}
+                </form>
+            </div>
+            <ul>
+                {% for task in tasks %}
+                    <li class="{% if task.is_completed %} done {% endif %}">
+                        <a href="{% url 'toggle_task' task.id %}" style="text-decoration: none; color: inherit;">
+                                <strong>
+                                {% if task.is_completed %} ✅ {% else %} ⭕ {% endif %}
+                                {{ task.title }}
+                            </strong>
+                        </a>
+                        {% if task.is_completed %} Done {% else %} Pending {% endif %}
+                        <p>{{ task.description }}</p>
+                        <small>Added on:{{ task.created_at|date:"M d, Y" }}</small>
+                        <a href="{% url 'delete_task' task.id %}" class="delete-btn">Delete</a>
+                    </li>
+                {% empty %}
+                    <li>No tasks yet!</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="from-container">
+            <h2>Add New Task</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,124 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+}
+
+h1 { color: #2c3e50; }
+
+ul { list-style: none; padding: 0; width: 300px; }
+
+li {
+    background: white;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-left: 5px solid #3498db;
+}
+
+.done { border-left-color: #2ecc71; text-decoration: line-through; color: #7f8c8d; }
+
+
+.form-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    width: 300px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+input, textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.delete-btn {
+    color: #e74c3c;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 1px solid #e74c3c;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.messages {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Django automatically adds the tag name as a CSS class */
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.alert {
+    position: relative; /* So the X can be positioned inside */
+    padding: 15px 40px 15px 15px; /* Extra padding on the right for the X */
+    transition: opacity 0.5s ease;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.close-btn {
+    position: absolute;
+    width:30px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: inherit; /* Matches the text color of the alert */
+    opacity: 0.6;
+}
+
+.close-btn:hover {
+    opacity: 1;
+}
