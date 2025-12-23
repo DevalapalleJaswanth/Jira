@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Task
 from .forms import TaskForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib import messages
@@ -32,6 +32,10 @@ def home(request):
     return render(request, 'core/home.html', {'tasks':tasks.order_by('-created_at'), 'form':form, 'search_input':search_input, 'date_input':date_input})
     # return HttpResponse("<h1>Hello! World</h1>")
 
+def is_manager(user):
+    return user.groups.filter(name='Manager').exits()
+
+@user_passes_test(is_manager)
 def delete_task(request,item_id):
     task = get_object_or_404(Task, id=item_id)
     task.delete()
